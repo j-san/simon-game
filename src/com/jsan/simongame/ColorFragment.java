@@ -1,6 +1,7 @@
-package be.irisnet.simongame;
+package com.jsan.simongame;
 
 
+import com.jsan.simongame.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -37,7 +38,7 @@ public class ColorFragment extends View implements OnTouchListener {
 //	}
 
 	public void setColor(int rColor) {
-		color = getResources().getColor(rColor);
+		color = rColor;
 		Log.i("app","color " + color);
 		setBackgroundColor(color);
 	}

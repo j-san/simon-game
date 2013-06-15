@@ -17,14 +17,14 @@
 		    android:layout_height="match_parent"
 		    android:orientation="horizontal" >
 	    
-	   		<be.irisnet.simongame.ColorFragment
+	   		<com.jsan.simongame.ColorFragment
 	            android:id="@+id/blue"
 	            android:background="@color/blue"
 	            android:layout_weight="1"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent" />
 	
-		   	<be.irisnet.simongame.ColorFragment
+		   	<com.jsan.simongame.ColorFragment
 	            android:id="@+id/red"
 	            android:background="@color/red"
 	            android:layout_weight="1"
@@ -39,14 +39,14 @@
 		    android:layout_height="match_parent"
 		    android:orientation="horizontal" >
 	   		
-	   		<be.irisnet.simongame.ColorFragment
+	   		<com.jsan.simongame.ColorFragment
 	            android:id="@+id/green"
 	            android:background="@color/green"
 	            android:layout_weight="1"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent" />
 	
-		    <be.irisnet.simongame.ColorFragment
+		    <com.jsan.simongame.ColorFragment
 	            android:id="@+id/yellow"
 	            android:background="@color/yellow"
 	            android:layout_weight="1"
@@ -61,7 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="X"
+        android:gravity="center"
         android:textColor="@color/black"
+        android:background="@drawable/background_indicator"
         android:textSize="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+		
 </FrameLayout>

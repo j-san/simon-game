@@ -1,6 +1,8 @@
-package be.irisnet.simongame;
+package com.jsan.simongame;
 
 import java.util.ArrayList;
+
+import com.jsan.simongame.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,10 +46,10 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
         colors[2] = blue;
         colors[3] = yellow;
 
-        blue.setColor(R.color.blue);
-        red.setColor(R.color.red);
-        green.setColor(R.color.green);
-        yellow.setColor(R.color.yellow);
+        blue.setColor(getResources().getColor(R.color.blue));
+        red.setColor(getResources().getColor(R.color.red));
+        green.setColor(getResources().getColor(R.color.green));
+        yellow.setColor(getResources().getColor(R.color.yellow));
         
         blue.setPushListener(this);
         red.setPushListener(this);
@@ -64,6 +66,7 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
     }
     
 	private void doSequence() {
+        indicator.setText("" + (sequenceIndex + 1));
 		
 		(new Handler()).postDelayed(new Runnable() {
 			@Override
@@ -75,7 +78,7 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 					public void run() {
 						sequence.get(sequenceIndex).off();
 
-						Log.i("app","sequence "+sequenceIndex);
+						Log.i("app","sequence " + sequenceIndex);
 						sequenceIndex++;
 						if(sequenceIndex < sequence.size()) {
 							doSequence();
@@ -94,7 +97,7 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 	private void incSequence() {
 		challenging = false;
 		challengeIndex = 0;
-        indicator.setText("0");
+//        indicator.setText("0");
 		sequence.add(colors[(int) (Math.random() * colors.length)]);
 		doSequence();
 	}
@@ -103,8 +106,9 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 	public void onPush(View v) {
 		if (challenging) {
 			if (v == sequence.get(challengeIndex)) {
+		        indicator.setText("" + (challengeIndex + 1));
+				Log.i("app", "good " + challengeIndex);
 				challengeIndex++;
-				Log.i("app", "good");
 				
 				if (challengeIndex >= sequence.size()) {
 					Log.i("app", "Yahouuuuuuu");
