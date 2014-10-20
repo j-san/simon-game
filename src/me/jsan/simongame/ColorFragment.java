@@ -1,9 +1,10 @@
-package com.jsan.simongame;
+package me.jsan.simongame;
 
 
 import com.jsan.simongame.R;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,7 +13,7 @@ import android.view.View.OnTouchListener;
 
 
 public class ColorFragment extends View implements OnTouchListener {
-	private int color;
+	private GradientDrawable drawable;
 	
 	public interface PushListener {
 		public void onPush(View v);
@@ -26,21 +27,7 @@ public class ColorFragment extends View implements OnTouchListener {
 	
 	public void onDraw(Canvas canvas) { 
 		setOnTouchListener(this);
-	}
-	 
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		View v = inflater.inflate(R.layout.color_fragment, container, false);
-//		v.setOnTouchListener(this);
-//
-//		return v;
-//	}
-
-	public void setColor(int rColor) {
-		color = rColor;
-		Log.i("app","color " + color);
-		setBackgroundColor(color);
+		drawable = (GradientDrawable)this.getBackground();
 	}
 
 	@Override
@@ -58,11 +45,11 @@ public class ColorFragment extends View implements OnTouchListener {
 	}
 
 	public void on() {
-		setBackgroundColor(getResources().getColor(R.color.white));
+		drawable.setAlpha(0);
 	}
 
 	public void off() {
-		setBackgroundColor(color);
+		drawable.setAlpha(255);
 	}
 
 	public PushListener getPushListener() {

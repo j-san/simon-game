@@ -1,4 +1,4 @@
-package com.jsan.simongame;
+package me.jsan.simongame;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 public class SimonGameActivity extends Activity implements ColorFragment.PushListener {
@@ -31,30 +32,22 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
-        blue = (ColorFragment)findViewById(R.id.blue);
-        red = (ColorFragment)findViewById(R.id.red);
-        green = (ColorFragment)findViewById(R.id.green);
-        yellow = (ColorFragment)findViewById(R.id.yellow);
         
         indicator = (TextView)findViewById(R.id.indicator);
         
         colors = new ColorFragment[4];
-        colors[0] = red;
-        colors[1] = green;
-        colors[2] = blue;
-        colors[3] = yellow;
-
-        blue.setColor(getResources().getColor(R.color.blue));
-        red.setColor(getResources().getColor(R.color.red));
-        green.setColor(getResources().getColor(R.color.green));
-        yellow.setColor(getResources().getColor(R.color.yellow));
+        colors[0] = (ColorFragment)findViewById(R.id.topleft);
+        colors[1] = (ColorFragment)findViewById(R.id.topright);
+        colors[2] = (ColorFragment)findViewById(R.id.bottomleft);
+        colors[3] = (ColorFragment)findViewById(R.id.bottomright);
         
-        blue.setPushListener(this);
-        red.setPushListener(this);
-        green.setPushListener(this);
-        yellow.setPushListener(this);
+        colors[0].setPushListener(this);
+        colors[1].setPushListener(this);
+        colors[2].setPushListener(this);
+        colors[3].setPushListener(this);
         
         initSequence();
         doSequence();
@@ -95,8 +88,6 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 	}
 	
 	private void incSequence() {
-		challenging = false;
-		challengeIndex = 0;
 //        indicator.setText("0");
 		sequence.add(colors[(int) (Math.random() * colors.length)]);
 		doSequence();
@@ -112,7 +103,9 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 				
 				if (challengeIndex >= sequence.size()) {
 					Log.i("app", "Yahouuuuuuu");
-			        indicator.setText("V");
+					challenging = false;
+					challengeIndex = 0;
+			        indicator.setText("\u2714"); // HEAVY CHECK MARK
 
 			        (new Handler()).postDelayed(new Runnable() {
 						@Override
@@ -123,7 +116,9 @@ public class SimonGameActivity extends Activity implements ColorFragment.PushLis
 				}
 			} else {
 				Log.i("app", "Bouhouhou");
-		        indicator.setText("X");
+				challenging = false;
+				challengeIndex = 0;
+		        indicator.setText("\u2718");// HEAVY BALLOT X
 
 		        (new Handler()).postDelayed(new Runnable() {
 					@Override
